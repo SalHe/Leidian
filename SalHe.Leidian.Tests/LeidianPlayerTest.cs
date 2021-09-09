@@ -197,5 +197,68 @@ namespace SalHe.Leidian.Tests
             Assert.AreEqual(fps, document.RootElement.GetProperty("framesPerSecond").GetInt32());
         }
 
+        [Test]
+        public void LocateTest()
+        {
+            // 测试通过
+            _defaultEmulatorController.Locate(new Location()
+            {
+                Longitude = 1,
+                Latitude = 2
+            });
+        }
+
+        [Test]
+        public void InputTest()
+        {
+            // 测试通过
+            _defaultEmulatorController.Input("打开一个文本框，人工查看这段内容能不能录进去");
+        }
+
+        [Test]
+        public void Network1Test()
+        {
+            // 测试通过
+            _defaultEmulatorController.DisconnectFromNetwork();
+        }
+
+        [Test]
+        public void Network2Test()
+        {
+            // 测试通过
+            _defaultEmulatorController.ConnectToNetwork();
+        }
+
+        [Test]
+        public void ScanQRCodeTest()
+        {
+            // 测试通过
+            _defaultEmulatorController.Scan(@"C:\Users\SalHe\Desktop\qrcode_www.ldmnq.com.png");
+        }
+
+        [Test]
+        public void AccelerationTest()
+        {
+            // 测试通过
+            _defaultEmulatorController.SetAcceleration(new Acceleration()
+            {
+                X = 1,
+                Y = 2,
+                Z = 3
+            });
+        }
+
+        [Test]
+        public void PressKeyTest()
+        {
+            // 测试通过
+            _defaultEmulatorController.PressKey("volumedown");
+            Thread.Sleep(1000);
+            _defaultEmulatorController.PressKey("volumeup");
+            Thread.Sleep(1000);
+            _defaultEmulatorController.PressKey("volumedown");
+            Thread.Sleep(1000);
+            _defaultEmulatorController.PressKey("volumedown");
+        }
     }
 }

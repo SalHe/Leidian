@@ -224,5 +224,65 @@ namespace SalHe.Leidian
             LdConsoleExecute("reboot");
         }
 
+        /// <summary>
+        /// 定位。
+        /// </summary>
+        /// <param name="location">定位信息</param>
+        public void Locate(Location location)
+        {
+            LdConsoleExecuteAction("call.locate", location.Longitude + "," + location.Latitude);
+        }
+
+        /// <summary>
+        /// 输入。
+        /// </summary>
+        /// <param name="content">输入内容</param>
+        public void Input(string content)
+        {
+            LdConsoleExecuteAction("call.input", content);
+        }
+
+        /// <summary>
+        /// 连接至网络。
+        /// </summary>
+        public void ConnectToNetwork()
+        {
+            LdConsoleExecuteAction("call.network", "connect");
+        }
+
+        /// <summary>
+        /// 从网络断开连接。
+        /// </summary>
+        public void DisconnectFromNetwork()
+        {
+            LdConsoleExecuteAction("call.network", "offline");
+        }
+
+        /// <summary>
+        /// 扫描二维码。
+        /// </summary>
+        /// <param name="qrCodeFilePath"></param>
+        public void Scan(string qrCodeFilePath)
+        {
+            LdConsoleExecute("scan", "--file", qrCodeFilePath);
+        }
+
+        /// <summary>
+        /// 模拟按键。
+        /// </summary>
+        /// <param name="key">按键</param>
+        public void PressKey(string key)
+        {
+            LdConsoleExecuteAction("call.keyboard", key);
+        }
+
+        /// <summary>
+        /// 设置加速度。
+        /// </summary>
+        /// <param name="acceleration"></param>
+        public void SetAcceleration(Acceleration acceleration)
+        {
+            LdConsoleExecuteAction("call.gravity", acceleration.X + "," + acceleration.Y + "," + acceleration.Z);
+        }
     }
 }
