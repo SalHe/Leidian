@@ -147,5 +147,54 @@ namespace SalHe.Leidian
             AddArgument("lockwindow", lockWindow, x => x == true ? "1" : "0");
             LdConsoleExecute("modify", arguments.ToArray());
         }
+
+        public LeidianEmulator Copy(string name)
+        {
+            return LeidianPlayer.CopyEmulator(Emulator.Index, name);
+        }
+
+        /// <summary>
+        /// 移除。
+        /// </summary>
+        public void Remove()
+        {
+            LeidianPlayer.RemoveEmulator(Emulator.Index);
+        }
+
+        /// <summary>
+        /// 备份。
+        /// </summary>
+        /// <param name="filePath"></param>
+        public void Backup(string filePath)
+        {
+            LeidianPlayer.BackupEmulator(Emulator.Index, filePath);
+        }
+
+        /// <summary>
+        /// 恢复备份。
+        /// </summary>
+        /// <param name="filePath"></param>
+        public void Restore(string filePath)
+        {
+            LeidianPlayer.RestoreEmulator(Emulator.Index, filePath);
+        }
+
+        /// <summary>
+        /// 重命名。
+        /// </summary>
+        /// <param name="name"></param>
+        public void Rename(string name)
+        {
+            LdConsoleExecute("rename", "--title", name);
+        }
+
+        /// <summary>
+        /// 重启。
+        /// </summary>
+        public void Reboot()
+        {
+            LdConsoleExecute("reboot");
+        }
+
     }
 }

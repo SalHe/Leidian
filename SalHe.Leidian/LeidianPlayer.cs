@@ -92,6 +92,68 @@ namespace SalHe.Leidian
             LdConsoleExecutable.Execute("quitall");
         }
 
+        /// <summary>
+        /// 新增模拟器。
+        /// </summary>
+        /// <param name="name">模拟器名称</param>
+        public LeidianEmulator AddEmulator(string name)
+        {
+            LdConsoleExecutable.Execute("add", "--name", name);
+            return ListEmulators().Last(x => x.Title.Equals(name));
+        }
+
+        /// <summary>
+        /// 复制模拟器。
+        /// </summary>
+        /// <param name="fromIndex">源模拟器索引</param>
+        /// <param name="name">新模拟器名称</param>
+        /// <returns></returns>
+        public LeidianEmulator CopyEmulator(int fromIndex, string name)
+        {
+            return CopyEmulator(fromIndex.ToString(), name);
+        }
+
+        /// <summary>
+        /// 复制模拟器。
+        /// </summary>
+        /// <param name="fromName">源模拟器名称</param>
+        /// <param name="name">新模拟器名称</param>
+        /// <returns></returns>
+        public LeidianEmulator CopyEmulator(string fromName, string name)
+        {
+            LdConsoleExecutable.Execute("copy", "--name", name, "--from", fromName);
+            return ListEmulators().Last(x => x.Title.Equals(name));
+        }
+
+        /// <summary>
+        /// 移除模拟器。
+        /// </summary>
+        /// <param name="emulator"></param>
+        public void RemoveEmulator(int id)
+        {
+            LdConsoleExecutable.Execute(id, "remove");
+        }
+
+        /// <summary>
+        /// 备份模拟器。
+        /// </summary>
+        /// <param name="id">模拟器ID</param>
+        /// <param name="filePath"></param>
+        public void BackupEmulator(int id, string filePath)
+        {
+            LdConsoleExecutable.Execute(id, "backup", "--file", filePath);
+        }
+
+        /// <summary>
+        /// 恢复模拟器。
+        /// </summary>
+        /// <param name="id">模拟器ID</param>
+        /// <param name="filePath"></param>
+        public void RestoreEmulator(int id, string filePath)
+        {
+            LdConsoleExecutable.Execute(id, "restore", "--file", filePath);
+        }
+
         private static LeidianPlayer _instance;
 
         /// <summary>

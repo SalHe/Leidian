@@ -29,9 +29,14 @@ namespace SalHe.Leidian.Tests
             }
         };
 
+        private LeidianEmulator _defaultEmulator;
+        private LeidianEmulatorController _defaultEmulatorController;
+
         [SetUp]
         public void Setup()
         {
+            _defaultEmulator = LeidianPlayer.Instance.ListEmulators().Last();
+            _defaultEmulatorController = new LeidianEmulatorController(_defaultEmulator, LeidianPlayer.Instance);
         }
 
         [Test]
@@ -106,7 +111,7 @@ namespace SalHe.Leidian.Tests
             string phoneNumber = "12345678901";
             bool autoRotate = new Random().Next(10) % 2 == 0;
             controller.Modify(resolution, autoRotate: autoRotate, phoneNumber: phoneNumber);
-            
+
             var document = JsonDocument.Parse(File.ReadAllText(configPath));
             File.WriteAllText(configPath, oldConfig);
             Assert.AreEqual(autoRotate, document.RootElement.GetProperty("basicSettings.autoRotate").GetBoolean());
@@ -116,5 +121,55 @@ namespace SalHe.Leidian.Tests
             Assert.AreEqual(resolution.Height, document.RootElement.GetProperty("advancedSettings.resolution").GetProperty("height").GetInt32());
 
         }
+
+        [Test]
+        public void EmulatorsManagementTest()
+        {
+            string name = "test-emulator";
+            string name2 = "test-emulator2";
+            LeidianEmulator emulator = LeidianPlayer.Instance.AddEmulator(name);
+            Assert.NotNull(emulator);
+
+            LeidianEmulatorController controller = new LeidianEmulatorController(emulator, LeidianPlayer.Instance);
+            LeidianEmulator emulator2 = controller.Copy(name2);
+            Assert.NotNull(emulator2);
+
+            string newName = "hello-new-name";
+            controller.Rename(newName);
+            controller.UpdateEmulator();
+            Assert.AreEqual(newName, controller.Emulator.Title);
+
+            LeidianPlayer.Instance.RemoveEmulator(emulator2.Index);
+            LeidianPlayer.Instance.RemoveEmulator(emulator.Index);
+            Assert.False(LeidianPlayer.Instance.ListEmulators().Any(x => x.Title.Contains(name2)));
+        }
+
+        [Test]
+        public void PowerTest()
+        {
+            _defaultEmulatorController.Quit();
+            _defaultEmulatorController.UpdateEmulator();
+            Assert.False(_defaultEmulatorController.Emulator.IsRunning);
+
+            _defaultEmulatorController.Launch();
+            _defaultEmulatorController.WaitForReady();
+            Assert.True(_defaultEmulatorController.Emulator.IsRunning);
+
+            _defaultEmulatorController.Reboot();
+            Thread.Sleep(3000);
+
+            _defaultEmulatorController.UpdateEmulator();
+            _defaultEmulatorController.WaitForReady();
+            Assert.True(_defaultEmulatorController.Emulator.IsRunning);
+
+            _defaultEmulatorController.Quit();
+        }
+
+        [Test]
+        public void BakUpTest()
+        {
+            // 这个不太好写测试，暂时先不写了
+        }
+
     }
 }
