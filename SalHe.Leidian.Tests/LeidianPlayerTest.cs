@@ -171,5 +171,17 @@ namespace SalHe.Leidian.Tests
             // 这个不太好写测试，暂时先不写了
         }
 
+        [Test]
+        public void PropsTest()
+        {
+            _defaultEmulatorController.Launch();
+            _defaultEmulatorController.WaitForReady();
+            string oldNumber = _defaultEmulatorController["phone.number"];
+            string newNumber = "00000000000";
+            _defaultEmulatorController["phone.number"] = newNumber;
+            Assert.AreEqual(newNumber, _defaultEmulatorController["phone.number"].Trim());
+            _defaultEmulatorController["phone.number"] = oldNumber;
+        }
+
     }
 }

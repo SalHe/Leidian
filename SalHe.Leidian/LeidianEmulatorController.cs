@@ -31,6 +31,17 @@ namespace SalHe.Leidian
         private Executable Ld => LeidianPlayer.LdExecutable;
 
         /// <summary>
+        /// 获取/设置属性（getprop/setprop）
+        /// </summary>
+        /// <param name="propName">属性名称</param>
+        /// <returns></returns>
+        public string this[string propName]
+        {
+            get => LdConsoleExecute("getprop", "--key", propName);
+            set => LdConsoleExecute("setprop", "--key", propName, "--value", value);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="emulator">模拟器实例</param>
@@ -58,9 +69,26 @@ namespace SalHe.Leidian
             return emulator;
         }
 
-        private string LdConsoleExecute(string subCommand, params string[] arguments)
+        /// <summary>
+        /// 使用"ldconsole"执行命令，自动指定索引。
+        /// </summary>
+        /// <param name="subCommand">子命令</param>
+        /// <param name="arguments">命令参数</param>
+        /// <returns></returns>
+        public string LdConsoleExecute(string subCommand, params string[] arguments)
         {
             return LdConsole.Execute(Emulator.Index, subCommand, arguments);
+        }
+
+        /// <summary>
+        /// 执行action。
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string LdConsoleExecuteAction(string key, string value)
+        {
+            return LdConsole.ExecuteAction(Emulator.Index, key, value);
         }
 
         /// <summary>
