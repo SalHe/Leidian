@@ -24,7 +24,7 @@ namespace SalHe.Leidian
         /// <returns></returns>
         public string ExecuteAction(int index, string key, string value)
         {
-            return Execute("action", "--index", index.ToString(), key, value);
+            return Execute(index, "action", "--key", key, "--value", value);
         }
 
         /// <summary>
@@ -33,12 +33,13 @@ namespace SalHe.Leidian
         /// <param name="index">模拟器索引</param>
         /// <param name="arguments">参数</param>
         /// <returns></returns>
-        public string Execute(int index, params string[] arguments)
+        public string Execute(int index, string subCommand, params string[] arguments)
         {
-            string[] args = new string[arguments.Length + 2];
-            Array.Copy(arguments, args, arguments.Length);
-            args[arguments.Length] = "--index";
-            args[arguments.Length + 1] = index.ToString();
+            string[] args = new string[arguments.Length + 3];
+            Array.Copy(arguments, 0, args, 3, arguments.Length);
+            args[0] = subCommand;
+            args[1] = "--index";
+            args[2] = index.ToString();
             return Execute(args);
         }
     }
