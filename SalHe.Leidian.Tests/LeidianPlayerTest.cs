@@ -119,7 +119,6 @@ namespace SalHe.Leidian.Tests
             Assert.AreEqual(resolution.DPI, document.RootElement.GetProperty("advancedSettings.resolutionDpi").GetInt32());
             Assert.AreEqual(resolution.Width, document.RootElement.GetProperty("advancedSettings.resolution").GetProperty("width").GetInt32());
             Assert.AreEqual(resolution.Height, document.RootElement.GetProperty("advancedSettings.resolution").GetProperty("height").GetInt32());
-
         }
 
         [Test]
@@ -181,6 +180,21 @@ namespace SalHe.Leidian.Tests
             _defaultEmulatorController["phone.number"] = newNumber;
             Assert.AreEqual(newNumber, _defaultEmulatorController["phone.number"].Trim());
             _defaultEmulatorController["phone.number"] = oldNumber;
+        }
+
+        [Test]
+        public void GlobalSettingTest()
+        {
+            string configPath = Path.Join(LeidianPlayer.Instance.DataDirectory, "config", "leidians.config");
+            string oldConfig = File.ReadAllText(configPath);
+
+            int fps = new Random().Next(59) + 1;
+            LeidianPlayer.Instance.GlobalSettings(fps);
+
+            var document = JsonDocument.Parse(File.ReadAllText(configPath));
+            File.WriteAllText(configPath, oldConfig);
+
+            Assert.AreEqual(fps, document.RootElement.GetProperty("framesPerSecond").GetInt32());
         }
 
     }

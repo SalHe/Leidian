@@ -154,6 +154,32 @@ namespace SalHe.Leidian
             LdConsoleExecutable.Execute(id, "restore", "--file", filePath);
         }
 
+        /// <summary>
+        /// 全局设置。
+        /// </summary>
+        /// <param name="fps">帧率</param>
+        /// <param name="audio">开启音频</param>
+        /// <param name="fastPlay">快速显示</param>
+        public void GlobalSettings(int? fps = null, bool? audio = null, bool? fastPlay = null)
+        {
+            List<string> arguments = new List<string>();
+            void AddArgument<T>(string name, T value, Func<T, string> converter = null)
+            {
+                if (value != null)
+                {
+                    arguments.Add($"--{name}");
+                    arguments.Add(converter == null ? value.ToString() : converter(value));
+                }
+            }
+
+            arguments.Add("globalsetting");
+            AddArgument("fps", fps);
+            AddArgument("audio", audio, x => x == true ? "1" : "0");
+            AddArgument("fastplay", audio, x => x == true ? "1" : "0");
+            LdConsoleExecutable.Execute(arguments.ToArray());
+        }
+
+
         private static LeidianPlayer _instance;
 
         /// <summary>
