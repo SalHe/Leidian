@@ -35,6 +35,11 @@ namespace SalHe.Leidian
         public string LdPath => string.IsNullOrEmpty(InstallDirectory) ? "" : InstallDirectory + @"\ld.exe";
 
         /// <summary>
+        /// adb.exe
+        /// </summary>
+        public string AdbPath => string.IsNullOrEmpty(InstallDirectory) ? "" : InstallDirectory + @"\adb.exe";
+
+        /// <summary>
         /// 封装了"ldconsole.exe"命令行的可执行文件实例。
         /// </summary>
         public LdConsoleExecutable LdConsoleExecutable { get; init; }
@@ -43,6 +48,11 @@ namespace SalHe.Leidian
         /// 封装了"ld.exe"命令行的可执行文件类。
         /// </summary>
         public Executable LdExecutable { get; init; }
+
+        /// <summary>
+        /// adb
+        /// </summary>
+        public Executable AdbExecutable { get; set; }
 
         /// <summary>
         /// 
@@ -55,6 +65,7 @@ namespace SalHe.Leidian
             DataDirectory = dataDirectory;
             LdConsoleExecutable = new LdConsoleExecutable(LdConsolePath);
             LdExecutable = new Executable(LdPath);
+            AdbExecutable = new Executable(AdbPath);
         }
 
         /// <summary>

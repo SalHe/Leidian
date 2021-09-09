@@ -260,5 +260,35 @@ namespace SalHe.Leidian.Tests
             Thread.Sleep(1000);
             _defaultEmulatorController.PressKey("volumedown");
         }
+
+        [Test]
+        public void LaunchExTest()
+        {
+            _defaultEmulatorController.Quit();
+            Thread.Sleep(2929);
+            _defaultEmulatorController.Launch("com.android.flysilkworm"); // 雷电游戏中心
+            _defaultEmulatorController.WaitForReady();
+            bool ok = false;
+            Task.Run(() =>
+            {
+                do
+                {
+                    var process = new Process();
+                    process.StartInfo = new()
+                    {
+                        FileName = $"\"{LeidianPlayer.Instance.AdbPath}\"",
+                        Arguments = "shell dumpsys activity activities",
+                        RedirectStandardError = true,
+                        RedirectStandardInput = true,
+                        RedirectStandardOutput = true
+                    };
+                    process.Start();
+                    process.WaitForExit(5000);
+                    ok = process.StandardOutput.ReadToEnd().Contains("com.android.flysilkworm");
+                } while (!ok);
+            }).Wait(30000);
+            Assert.True(ok);
+            _defaultEmulatorController.Quit();
+        }
     }
 }

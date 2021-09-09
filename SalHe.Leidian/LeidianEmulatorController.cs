@@ -100,6 +100,15 @@ namespace SalHe.Leidian
         }
 
         /// <summary>
+        /// 打开模拟器并自动启动APP。
+        /// </summary>
+        /// <param name="appPackage"></param>
+        public void Launch(string appPackage)
+        {
+            LdConsoleExecute("launchex", "--packagename", appPackage);
+        }
+
+        /// <summary>
         /// 等待模拟器启动完毕。
         /// </summary>
         /// <param name="timeout">期望超时时长。</param>
