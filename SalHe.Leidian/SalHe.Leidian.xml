@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SalHe.Leidian</name>
+    </assembly>
+    <members>
+        <member name="T:SalHe.Leidian.Executable">
+             <summary>
+             可执行文件。
+            
+             用于封装对可执行文件快速执行命令行操作。
+             </summary>
+        </member>
+        <member name="P:SalHe.Leidian.Executable.Path">
+            <summary>
+            可执行文件路径。
+            </summary>
+        </member>
+        <member name="M:SalHe.Leidian.Executable.Execute(System.String[])">
+            <summary>
+            执行命令。
+            </summary>
+            <param name="arguments">命令行参数</param>
+            <returns>返回标准输出的内容</returns>
+        </member>
+        <member name="T:SalHe.Leidian.LdConsoleExecutable">
+            <summary>
+            ldconsole.exe
+            </summary>
+        </member>
+        <member name="M:SalHe.Leidian.LdConsoleExecutable.ExecuteAction(System.Int32,System.String,System.String)">
+            <summary>
+            执行action。
+            </summary>
+            <param name="index">模拟器索引</param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SalHe.Leidian.LdConsoleExecutable.Execute(System.Int32,System.String,System.String[])">
+            <summary>
+            执行。
+            </summary>
+            <param name="index">模拟器索引</param>
+            <param name="arguments">参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:SalHe.Leidian.LeidianEmulator">
+            <summary>
+            雷电模拟器实例信息。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianEmulator.Index">
+            <summary>
+            索引。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianEmulator.Title">
+            <summary>
+            标题。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianEmulator.MainWindowHandle">
+            <summary>
+            主窗口句柄。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianEmulator.RenderWindowHandle">
+            <summary>
+            渲染窗口句柄。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianEmulator.IsRunning">
+            <summary>
+            是否处于运行状态。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianEmulator.PID">
+            <summary>
+            主进程ID。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianEmulator.VBoxPID">
+            <summary>
+            对应VirtualBox进程ID。
+            </summary>
+        </member>
+        <member name="T:SalHe.Leidian.LeidianEmulatorController">
+            <summary>
+            雷电模拟器控制器。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianEmulatorController.Emulator">
+            <summary>
+            雷电模拟器实例。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianEmulatorController.LeidianPlayer">
+            <summary>
+            雷电模拟器。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianEmulatorController.Item(System.String)">
+            <summary>
+            获取/设置属性（getprop/setprop）
+            </summary>
+            <param name="propName">属性名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.#ctor(SalHe.Leidian.LeidianEmulator,SalHe.Leidian.LeidianPlayer)">
+            <summary>
+            
+            </summary>
+            <param name="emulator">模拟器实例</param>
+            <param name="leidianPlayer">雷丹模拟器</param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.UpdateEmulator">
+            <summary>
+            更新当前雷电模拟器信息。
+            </summary>
+            <returns>返回信息的一个副本。</returns>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.LdConsoleExecute(System.String,System.String[])">
+            <summary>
+            使用"ldconsole"执行命令，自动指定索引。
+            </summary>
+            <param name="subCommand">子命令</param>
+            <param name="arguments">命令参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.LdConsoleExecuteAction(System.String,System.String)">
+            <summary>
+            执行action。
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Launch">
+            <summary>
+            打开模拟器。
+            </summary>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Launch(System.String)">
+            <summary>
+            打开模拟器并自动启动APP。
+            </summary>
+            <param name="appPackage"></param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.WaitForReady(System.Int32)">
+            <summary>
+            等待模拟器启动完毕。
+            </summary>
+            <param name="timeout">期望超时时长。</param>
+            <returns></returns>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Quit">
+            <summary>
+            退出模拟器。
+            </summary>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Modify(SalHe.Leidian.ScreenResolution,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+             <summary>
+             修改模拟器。
+            
+             传null的参数对应的配置不会被修改。
+             </summary>
+             <param name="resolution">分辨率</param>
+             <param name="cpuCores">CPU核心数</param>
+             <param name="memory">内存大小，单位MB</param>
+             <param name="manufacturer">生产商</param>
+             <param name="model">型号</param>
+             <param name="phoneNumber">电话号码</param>
+             <param name="IMEI"></param>
+             <param name="IMSI"></param>
+             <param name="SIM"></param>
+             <param name="AndroidId"></param>
+             <param name="mac">网卡地址</param>
+             <param name="autoRotate">自动旋转</param>
+             <param name="lockWindow"></param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Remove">
+            <summary>
+            移除。
+            </summary>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Backup(System.String)">
+            <summary>
+            备份。
+            </summary>
+            <param name="filePath"></param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Restore(System.String)">
+            <summary>
+            恢复备份。
+            </summary>
+            <param name="filePath"></param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Rename(System.String)">
+            <summary>
+            重命名。
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Reboot">
+            <summary>
+            重启。
+            </summary>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Locate(SalHe.Leidian.Location)">
+            <summary>
+            定位。
+            </summary>
+            <param name="location">定位信息</param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Input(System.String)">
+            <summary>
+            输入。
+            </summary>
+            <param name="content">输入内容</param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.ConnectToNetwork">
+            <summary>
+            连接至网络。
+            </summary>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.DisconnectFromNetwork">
+            <summary>
+            从网络断开连接。
+            </summary>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.Scan(System.String)">
+            <summary>
+            扫描二维码。
+            </summary>
+            <param name="qrCodeFilePath"></param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.PressKey(System.String)">
+            <summary>
+            模拟按键。
+            </summary>
+            <param name="key">按键</param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianEmulatorController.SetAcceleration(SalHe.Leidian.Acceleration)">
+            <summary>
+            设置加速度。
+            </summary>
+            <param name="acceleration"></param>
+        </member>
+        <member name="T:SalHe.Leidian.LeidianPlayer">
+            <summary>
+            雷电模拟器。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianPlayer.InstallDirectory">
+            <summary>
+            安装路径。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianPlayer.DataDirectory">
+            <summary>
+            数据路径。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianPlayer.LdConsolePath">
+            <summary>
+            "ldconsole.exe"的路径。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianPlayer.LdPath">
+            <summary>
+            "ld.exe"的路径。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianPlayer.AdbPath">
+            <summary>
+            adb.exe
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianPlayer.LdConsoleExecutable">
+            <summary>
+            封装了"ldconsole.exe"命令行的可执行文件实例。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianPlayer.LdExecutable">
+            <summary>
+            封装了"ld.exe"命令行的可执行文件类。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianPlayer.AdbExecutable">
+            <summary>
+            adb
+            </summary>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianPlayer.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="installDirectory">安装路径</param>
+            <param name="dataDirectory">数据路径</param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianPlayer.ListEmulators">
+            <summary>
+            列出模拟器实例。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianPlayer.QuitAll">
+            <summary>
+            退出所有模拟器。
+            </summary>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianPlayer.AddEmulator(System.String)">
+            <summary>
+            新增模拟器。
+            </summary>
+            <param name="name">模拟器名称</param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianPlayer.CopyEmulator(System.Int32,System.String)">
+            <summary>
+            复制模拟器。
+            </summary>
+            <param name="fromIndex">源模拟器索引</param>
+            <param name="name">新模拟器名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianPlayer.CopyEmulator(System.String,System.String)">
+            <summary>
+            复制模拟器。
+            </summary>
+            <param name="fromName">源模拟器名称</param>
+            <param name="name">新模拟器名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianPlayer.RemoveEmulator(System.Int32)">
+            <summary>
+            移除模拟器。
+            </summary>
+            <param name="emulator"></param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianPlayer.BackupEmulator(System.Int32,System.String)">
+            <summary>
+            备份模拟器。
+            </summary>
+            <param name="id">模拟器ID</param>
+            <param name="filePath"></param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianPlayer.RestoreEmulator(System.Int32,System.String)">
+            <summary>
+            恢复模拟器。
+            </summary>
+            <param name="id">模拟器ID</param>
+            <param name="filePath"></param>
+        </member>
+        <member name="M:SalHe.Leidian.LeidianPlayer.GlobalSettings(System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>
+            全局设置。
+            </summary>
+            <param name="fps">帧率</param>
+            <param name="audio">开启音频</param>
+            <param name="fastPlay">快速显示</param>
+        </member>
+        <member name="P:SalHe.Leidian.LeidianPlayer.Instance">
+             <summary>
+             雷电模拟器默认实例。
+            
+             该实例会自动被创建，并通过注册表获取雷电模拟器的安装路径以及数据路径。
+             </summary>
+        </member>
+        <member name="P:SalHe.Leidian.Location.Longitude">
+            <summary>
+            经度(E/W)。
+            </summary>
+        </member>
+        <member name="P:SalHe.Leidian.Location.Latitude">
+            <summary>
+            纬度(N/S)。
+            </summary>
+        </member>
+    </members>
+</doc>
